@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
+:root {
+    --color-text: #ffffff;
+    --background-color-primary: #04AFB5;
+    --background-color-header: #025457;
+    --background-color-field: #038A8F;
+}
 
 * {
     margin: 0;
@@ -7,21 +13,21 @@
 }
 
 body {
-    background-color: #04AFB5;
-    color: #fff;
+    background-color: var(--background-color-primary);
+    color: var(--color-text);
     font-family: 'Montserrat', sans-serif; /*https://fonts.google.com/*/
     font-weight: 300;
     font-size: 20px;
 }
 
 .header {
-    background-color: #025457;
+    background-color: var(--background-color-header);
     padding: 25px 100px;
     font-weight: 600;
 }
 
 .filters {
-    background-color: #038A8F;
+    background-color: var(--background-color-field);
     margin-top: 5px;
     padding: 5px 5px;
     font-weight: 600;
@@ -48,7 +54,7 @@ main .pokemon {
     font-weight: 300;
     /*margin-bottom: 25px;*/
     margin: 5px;
-    background-color: #038A8F;
+    background-color: var(--background-color-field);
     padding: 5px;
     width: 220px;
     height: auto;
