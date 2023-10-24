@@ -24,6 +24,11 @@ body {
     background-color: var(--background-color-header);
     padding: 25px 100px;
     font-weight: 600;
+    text-align: center;
+}
+
+h1 {
+    font-size: 30px;
 }
 
 .filters {
@@ -32,6 +37,7 @@ body {
     padding: 5px 5px;
     font-weight: 600;
     text-align: center;
+
 }
 
 .filters label {

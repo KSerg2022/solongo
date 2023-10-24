@@ -5,14 +5,13 @@ class PokTypes extends React.Component {
     types = this.props.types
 
     render() {
-        return (<div>
+        return (
             <ul>
                     {this.props.types.map((type) => (
                             <li key={type.type.name}>{type.type.name}</li>
                         )
                     )}
-            </ul>
-        </div>)
+            </ul>)
     }
 }
 

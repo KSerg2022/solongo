@@ -5,18 +5,15 @@ class Filters extends React.Component {
     constructor(props) {
         super(props);
 
-        let pokemonsTypes = new Set()
+        let types = new Set()
         for (let pokemon of this.props.pokemons) {
             for (let type of pokemon.types) {
-                pokemonsTypes.add(type.type.name)
-
-                this.state = {[type.type.name]: true}
-                console.log(this.state, this.state[type.type.name])
+                types.add(type.type.name)
             }
         }
 
         this.state = {
-            pokemonTypes: pokemonsTypes,
+            pokemonTypes: types,
         }
 
         this.getTypes = this.getTypes.bind(this)
@@ -34,7 +31,7 @@ class Filters extends React.Component {
     render() {
 
         return (<div className="filters">
-                <p>Фильтры: </p>
+                <h5>Filters: </h5>
                 <form>
                     <div className="row justify-content-md-center">
                         {this.getTypes().map((value) => (
@@ -42,10 +39,7 @@ class Filters extends React.Component {
                                 <input type="checkbox" id={value}
                                     checked={this.state[value]}
                                        onChange={(e) => {
-                                           // const val = e.target.checked;
-                                           console.log(value, e.target.checked)
                                            this.setState({[value]: e.target.checked})
-                                           console.log(this.state.grass, this.state[value])
                                        }}
                                 /> {value}
                             </label>

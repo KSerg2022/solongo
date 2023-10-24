@@ -34,7 +34,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Header title="Список покемонов"/>
+                <Header title="Pokemon's list."/>
                 <main>
                     <Pokemons pokemons={this.state.pokemons.sort(function (a, b) {
                         return a.id - b.id

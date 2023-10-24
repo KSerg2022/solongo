@@ -22,7 +22,7 @@ class Pokemons extends React.Component {
     )
         else
             return (<div className="filters">
-                <h3>Покемонов нет</h3>
+                <h5>There are no Pokemon.</h5>
             </div>)
     }
 }
