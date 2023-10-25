@@ -1,58 +1,66 @@
-import React from "react";
+import React, {useState} from 'react';
 
-class Filters extends React.Component {
+const Filters = (props) => {
+    const [listTypes, setListTypes] = useState(getListTypes)
+    const [statusTypes, setStatusTypes] = useState(getStatusTypes)
+    const [filters, setFilters] = useState(getTypes)
 
-    constructor(props) {
-        super(props);
-
+    function getListTypes() {
         let types = new Set()
-        for (let pokemon of this.props.pokemons) {
+        for (let pokemon of props.pokemons) {
             for (let type of pokemon.types) {
                 types.add(type.type.name)
             }
         }
-
-        this.state = {
-            pokemonTypes: types,
-        }
-
-        this.getTypes = this.getTypes.bind(this)
+        return types
     }
 
-    getTypes() {
+    function getStatusTypes() {
+        let status = {}
+        for (let pokemon of props.pokemons) {
+            for (let type of pokemon.types) {
+                status[type.type.name] = false
+            }
+        }
+        return status
+    }
+
+    function getTypes() {
         let types = []
-        for (const type of this.state.pokemonTypes.values()) {
+        for (const type of listTypes.values()) {
             types.push(type)
         }
         return types.sort()
     }
 
+    return (<div className="filters">
+            <h5>Filters: </h5>
+            <form>
+                <div className="row justify-content-md-center">
+                    {filters.map((value) => (
+                        <label className="col" key={value} htmlFor={value}>
+                            <input type="checkbox" id={value}
+                                   checked={statusTypes[value]}
+                                   onChange={(e) => {
+                                       const qqq = {...statusTypes}
+                                       // console.log("value--", value, statusTypes[value], statusTypes, qqq)
+                                       qqq[value] = e.target.checked
+                                       setStatusTypes(qqq)
 
-    render() {
+                                       setStatusTypes({...statusTypes, value: e.target.checked}) // video
 
-        return (<div className="filters">
-                <h5>Filters: </h5>
-                <form>
-                    <div className="row justify-content-md-center">
-                        {this.getTypes().map((value) => (
-                            <label className="col" key={value} htmlFor={value}>
-                                <input type="checkbox" id={value}
-                                    checked={this.state[value]}
-                                       onChange={(e) => {
-                                           this.setState({[value]: e.target.checked})
-                                       }}
-                                /> {value}
-                            </label>
+                                       // console.log("1onChange--", qqq)
+                                       // console.log("2onChange--", value, e.target.checked, statusTypes[value], statusTypes)
+                                   }}
+                            /> {value}
+                        </label>
 
-                        ))}
-                    </div>
-                </form>
-            </div>
-        )
-    }
+                    ))}
+                </div>
+            </form>
+        </div>
+    )
+};
 
-}
+export default Filters;
 
-export {
-    Filters,
-}

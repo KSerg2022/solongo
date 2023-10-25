@@ -1,20 +1,14 @@
-import React from "react";
+import React from 'react';
 
-class PokTypes extends React.Component {
+const PokTypes = (props) => {
+    let types = props.types
+    return (
+        <ul>
+            {types.map((type) => (
+                    <li key={type.type.name}>{type.type.name}</li>
+                )
+            )}
+        </ul>)
+};
 
-    types = this.props.types
-
-    render() {
-        return (
-            <ul>
-                    {this.props.types.map((type) => (
-                            <li key={type.type.name}>{type.type.name}</li>
-                        )
-                    )}
-            </ul>)
-    }
-}
-
-export {
-    PokTypes,
-}
+export default PokTypes;

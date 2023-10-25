@@ -1,14 +1,14 @@
 import React from "react";
 import axios from "axios";
 
-import {Header} from "./componants/Header";
+import Header from "./componants/Header";
 import './css/main.css'
-import {Pokemons} from "./componants/Pokemons";
+import Pokemons from "./componants/Pokemons";
 
 
 const baseUrl = "https://pokeapi.co/api/v2/pokemon/"
 let start = 1
-let end = 151
+let end = 6
 
 class App extends React.Component {
 

@@ -1,27 +1,16 @@
-import React from "react";
+import React from 'react';
 
-import {PokSprites} from "./Pok_sprites";
-import {PokTypes} from "./Pok_types";
+import PokSprites from "./Pok_sprites";
+import PokTypes from "./Pok_types";
 
-class Pokemon extends React.Component {
-
-    pokemon = this.props.pokemon
-    name = this.pokemon.name
-
-    render() {
-        return (
-            <div className="col- pokemon">
-            <PokSprites sprites={this.pokemon.sprites}/>
-
-            <h5>{this.pokemon.id}. {this.name}</h5>
-
-            <PokTypes types={this.pokemon.types} />
-
+const Pokemon = ({pokemon}) => {
+    console.log('Pokemon - sprites', pokemon)
+    return (
+        <div className="col- pokemon">
+            <PokSprites sprites={pokemon.sprites}/>
+            <h5>{pokemon.id}. {pokemon.name}</h5>
+            <PokTypes types={pokemon.types}/>
         </div>)
-    }
-}
+};
 
-
-export {
-    Pokemon,
-}
+export default Pokemon;
