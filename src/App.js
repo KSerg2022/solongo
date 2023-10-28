@@ -7,7 +7,7 @@ import Pokemons from "./componants/Pokemons";
 
 const baseUrl = "https://pokeapi.co/api/v2/pokemon/"
 let start = 1
-let end = 6
+let end = 56
 
 export const App = () => {
     const [pokemons, setPokemons] = useState([])

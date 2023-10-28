@@ -1,11 +1,12 @@
 import React from 'react';
 
-const PokTypes = (props) => {
-    let types = props.types
+export const PokTypes = ({types}) => {
     return (
-        <ul>
+        <ul className="typesList">
             {types.map((type) =>
-                    <li key={type}>{type}</li>
+                    <li key={type}>
+                        <span className="listItem">{type}</span><
+                        /li>
             )}
         </ul>)
 };

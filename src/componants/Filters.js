@@ -4,30 +4,30 @@ import MyCheckBox from "./UI/MyCheckBox";
 
 function getListTypes(data) {
     let types = new Set()
-    console.log('---getListTypes---in--', data)
+    // console.log('---getListTypes---in--', data)
     for (let pokemon of data) {
         for (let type of pokemon.types) {
             types.add(type)
         }
     }
-    console.log('---getListTypes---out--', types)
+    // console.log('---getListTypes---out--', types)
     return [...types].sort()
 }
 
 function getListFilters(data) {
     const types = getListTypes(data)
     let categories = {}
-    console.log('---getListFilters---in--', types)
+    // console.log('---getListFilters---in--', types)
     for (let type of types) {
         categories[type] = false
     }
 
-    console.log('---getListFilters---out--', categories)
+    // console.log('---getListFilters---out--', categories)
     return categories
 }
 
 
-const Filters = ({pokemons, onFilter}) => {
+export const Filters = ({pokemons, onFilter}) => {
     const [types, setTypes] = useState([])
     const [filters, setFilters] = useState({})
 
@@ -39,25 +39,27 @@ const Filters = ({pokemons, onFilter}) => {
 
     function upgradeStatus(e) {
         let name = e.target.name
-        console.log('1--upgradeStatus--', name, filters)
+        // console.log('1--upgradeStatus--', name, filters)
         setFilters(prevState => {
             return {...prevState, [name]: !prevState[name]}
         })
-        console.log('2--upgradeStatus--', filters)
+
+        // setFilters({
+        //     ...filters, [name]: !filters[name]
+        // })
+
+        // console.log('2--upgradeStatus--', filters)
         currentFilter()
     }
 
+
     function currentFilter() {
         let qqq = []
-        console.log('---currentFilter---1', filters)
-        console.log('---currentFilter---2', types)
         for (let type of types) {
-            console.log('---curren---2', type, filters[type])
             if (filters[type] === true) {
                 qqq.push(type)
             }
         }
-        console.log('---currentFilter---3', qqq)
         onFilter(qqq)
     }
 
@@ -81,4 +83,3 @@ const Filters = ({pokemons, onFilter}) => {
 };
 
 export default Filters;
-

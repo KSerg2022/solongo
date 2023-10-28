@@ -2,13 +2,14 @@ import React, {useEffect, useState} from 'react';
 
 import PokSprites from "./Pok_sprites";
 import PokTypes from "./Pok_types";
+import Pol_name from "./Pol_name";
 
 
 export const Pokemon = ({pokemons}) => {
-    const [cards, setCards] = useState([])
+    const [cardsPokemon, setCardsPokemon] = useState([])
 
     useEffect(() => {
-        setCards(pokemons)
+        setCardsPokemon(pokemons)
     }, [pokemons])
 
     if (!pokemons) {
@@ -17,10 +18,10 @@ export const Pokemon = ({pokemons}) => {
 
     return (
         <div className="row d-flex justify-content-center mb-3">
-            {cards?.map(pokemon =>
+            {cardsPokemon?.map(pokemon =>
                 <div className="col- pokemon" key={pokemon.id}>
                     <PokSprites sprites={pokemon.img_url}/>
-                    <h5>{pokemon.id}. {pokemon.name}</h5>
+                    <Pol_name id={pokemon.id} name={pokemon.name} />
                     <PokTypes types={pokemon.types}/>
                 </div>
             )

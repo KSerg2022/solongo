@@ -1,11 +1,12 @@
 import React from 'react';
 import classes from "./MyCheckBox.module.css";
 
-const MyCheckBox = (props) => {
+export const MyCheckBox = (props) => {
     return (
-            <label className="col" htmlFor={props.id}>
-                <input {...props} className={classes.myCheckBoxInput}/>
-                {props.name}</label>
+        <label className="col" htmlFor={props.id}>
+            <input {...props} className={classes.myCheckBoxInput} />
+            {props.name}
+        </label>
     );
 };
 
