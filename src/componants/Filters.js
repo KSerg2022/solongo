@@ -4,25 +4,20 @@ import MyCheckBox from "./UI/MyCheckBox";
 
 function getListTypes(data) {
     let types = new Set()
-    // console.log('---getListTypes---in--', data)
     for (let pokemon of data) {
         for (let type of pokemon.types) {
             types.add(type)
         }
     }
-    // console.log('---getListTypes---out--', types)
     return [...types].sort()
 }
 
 function getListFilters(data) {
     const types = getListTypes(data)
     let categories = {}
-    // console.log('---getListFilters---in--', types)
     for (let type of types) {
         categories[type] = false
     }
-
-    // console.log('---getListFilters---out--', categories)
     return categories
 }
 
@@ -54,13 +49,13 @@ export const Filters = ({pokemons, onFilter}) => {
 
 
     function currentFilter() {
-        let qqq = []
+        let filterList = []
         for (let type of types) {
             if (filters[type] === true) {
-                qqq.push(type)
+                filterList.push(type)
             }
         }
-        onFilter(qqq)
+        onFilter(filterList)
     }
 
     return (<div className="filters">
