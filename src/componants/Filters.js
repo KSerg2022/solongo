@@ -1,60 +1,78 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import MyCheckBox from "./UI/MyCheckBox";
 
-const Filters = (props) => {
-    const [listTypes, setListTypes] = useState(getListTypes)
-    const [statusTypes, setStatusTypes] = useState(getStatusTypes)
-    const [filters, setFilters] = useState(getTypes)
 
-    function getListTypes() {
-        let types = new Set()
-        for (let pokemon of props.pokemons) {
-            for (let type of pokemon.types) {
-                types.add(type.type.name)
-            }
+function getListTypes(data) {
+    let types = new Set()
+    console.log('---getListTypes---in--', data)
+    for (let pokemon of data) {
+        for (let type of pokemon.types) {
+            types.add(type)
         }
-        return types
+    }
+    console.log('---getListTypes---out--', types)
+    return [...types].sort()
+}
+
+function getListFilters(data) {
+    const types = getListTypes(data)
+    let categories = {}
+    console.log('---getListFilters---in--', types)
+    for (let type of types) {
+        categories[type] = false
     }
 
-    function getStatusTypes() {
-        let status = {}
-        for (let pokemon of props.pokemons) {
-            for (let type of pokemon.types) {
-                status[type.type.name] = false
-            }
-        }
-        return status
+    console.log('---getListFilters---out--', categories)
+    return categories
+}
+
+
+const Filters = ({pokemons, onFilter}) => {
+    const [types, setTypes] = useState([])
+    const [filters, setFilters] = useState({})
+
+    useEffect(() => {
+        setTypes(getListTypes(pokemons))
+        setFilters(getListFilters(pokemons))
+    }, [pokemons])
+
+
+    function upgradeStatus(e) {
+        let name = e.target.name
+        console.log('1--upgradeStatus--', name, filters)
+        setFilters(prevState => {
+            return {...prevState, [name]: !prevState[name]}
+        })
+        console.log('2--upgradeStatus--', filters)
+        currentFilter()
     }
 
-    function getTypes() {
-        let types = []
-        for (const type of listTypes.values()) {
-            types.push(type)
+    function currentFilter() {
+        let qqq = []
+        console.log('---currentFilter---1', filters)
+        console.log('---currentFilter---2', types)
+        for (let type of types) {
+            console.log('---curren---2', type, filters[type])
+            if (filters[type] === true) {
+                qqq.push(type)
+            }
         }
-        return types.sort()
+        console.log('---currentFilter---3', qqq)
+        onFilter(qqq)
     }
 
     return (<div className="filters">
             <h5>Filters: </h5>
             <form>
                 <div className="row justify-content-md-center">
-                    {filters.map((value) => (
-                        <label className="col" key={value} htmlFor={value}>
-                            <input type="checkbox" id={value}
-                                   checked={statusTypes[value]}
-                                   onChange={(e) => {
-                                       const qqq = {...statusTypes}
-                                       // console.log("value--", value, statusTypes[value], statusTypes, qqq)
-                                       qqq[value] = e.target.checked
-                                       setStatusTypes(qqq)
-
-                                       setStatusTypes({...statusTypes, value: e.target.checked}) // video
-
-                                       // console.log("1onChange--", qqq)
-                                       // console.log("2onChange--", value, e.target.checked, statusTypes[value], statusTypes)
-                                   }}
-                            /> {value}
-                        </label>
-
+                    {types.map((value, i) => (
+                        <MyCheckBox
+                            key={i}
+                            type="checkbox"
+                            id={value}
+                            name={value}
+                            onChange={upgradeStatus}
+                        />
                     ))}
                 </div>
             </form>

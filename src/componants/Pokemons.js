@@ -1,23 +1,39 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import Pokemon from "./Pokemon";
 import Filters from "./Filters";
 
-const Pokemons = ({pokemons}) => {
-    console.log('Pokemons ', pokemons)
-    if (pokemons.length > 0)
+
+export const Pokemons = ({pokemons}) => {
+    const [forFilter, setForFilter] = useState([])
+    const [current, setCurrent] = useState([])
+
+    useEffect(() => {
+        setForFilter(pokemons)
+        setCurrent(pokemons)
+    }, [pokemons])
+
+    function filteredPokemons(filter = []) {
+        console.log('1---filteredPokemons', filter, filter.length, current)
+        filter.length === 0
+            ? setCurrent(pokemons)
+            : filter.length === 1
+                ? setCurrent([...forFilter].filter((pokemon) => pokemon.types.includes(...filter)))
+                : setCurrent([...forFilter].filter((pokemon) => everyType(pokemon.types, filter)))
+    }
+
+    function everyType(types, filter) {
+        return filter.every((el) => types.includes(el))
+    }
+
+    if (forFilter.length > 0)
         return (
-            <>
-                <Filters pokemons={pokemons}
-                />
+            <div>
+                <Filters pokemons={forFilter} onFilter={filteredPokemons}/>
                 <div className="container-fluid">
-                    <div className="row d-flex justify-content-center mb-3">
-                        {pokemons.map(pokemon =>
-                                <Pokemon key={pokemon.id} pokemon={pokemon}/>
-                         )}
-                    </div>
+                    <Pokemon pokemons={current}/>
                 </div>
-            </>
+            </div>
         )
     else
         return (<div className="filters">

@@ -1,50 +1,47 @@
-import React from "react";
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
-import Header from "./componants/Header";
 import './css/main.css'
+import Header from "./componants/Header";
 import Pokemons from "./componants/Pokemons";
-
 
 const baseUrl = "https://pokeapi.co/api/v2/pokemon/"
 let start = 1
 let end = 6
 
-class App extends React.Component {
+export const App = () => {
+    const [pokemons, setPokemons] = useState([])
 
-    constructor(props) {
-        super(props);
 
+    useEffect(() => {
+        setPokemons(prevState => prevState=[])
         for (; start < end; start++) {
             axios.get(baseUrl.concat(start)).then((res) => {
-                    let allPokemons = this.state.pokemons
-                    allPokemons.push(res.data)
-                    this.setState({pokemons: []}, () => {
-                        this.setState({pokemons: [...allPokemons]})
-                    })
+                let data = {
+                    id: res.data.id,
+                    name: res.data.name,
+                    img_url: res.data.sprites.other.home.front_default,
+                    types: res.data.types.map(el => el.type.name)
                 }
-            )
+                setPokemons(prevState => [...prevState, data])
+            })
         }
+    }, [])
 
-        this.state = {
-            pokemons: [],
-        }
+    const sortedPokemons = () => {
+        return pokemons.sort(function (a, b) {
+            return a.id - b.id
+        })
     }
 
-    render() {
-        return (
-            <div>
-                <Header title="Pokemon's list."/>
-                <main>
-                    <Pokemons pokemons={this.state.pokemons.sort(function (a, b) {
-                        return a.id - b.id
-                    })}
-                    />
-                </main>
-            </div>
-        )
-    }
-}
+    return (
+        <div>
+            <Header title="Pokemon's list."/>
+            <main>
+                <Pokemons pokemons={sortedPokemons} />
+            </main>
+        </div>
+    );
+};
 
-
-export default App
+export default App;
