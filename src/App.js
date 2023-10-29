@@ -7,7 +7,7 @@ import Pokemons from "./componants/Pokemons";
 
 const baseUrl = "https://pokeapi.co/api/v2/pokemon/"
 let start = 1
-let end = 56
+let end = 150
 
 export const App = () => {
     const [pokemons, setPokemons] = useState([])
@@ -15,7 +15,7 @@ export const App = () => {
 
     useEffect(() => {
         setPokemons(prevState => prevState=[])
-        for (; start < end; start++) {
+        for (; start <= end; start++) {
             axios.get(baseUrl.concat(start)).then((res) => {
                 let data = {
                     id: res.data.id,

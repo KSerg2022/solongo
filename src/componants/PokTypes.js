@@ -4,8 +4,8 @@ export const PokTypes = ({types}) => {
     return (
         <ul className="typesList">
             {types.map((type) =>
-                    <li key={type}>
-                        <span className="listItem">{type}</span><
+                <li key={type}>
+                    <span className="listItem">{type}</span><
                         /li>
             )}
         </ul>)

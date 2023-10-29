@@ -7,7 +7,7 @@ export const PolName = ({id, name}) => {
     }
 
     return (
-            <h5>{id}. {nameTitle()}</h5>
+        <h5>{id}. {nameTitle()}</h5>
     );
 };
 
