@@ -6,16 +6,16 @@ import Header from "./componants/Header";
 import Pokemons from "./componants/Pokemons";
 
 const baseUrl = "https://pokeapi.co/api/v2/pokemon/"
-let start = 1
-let end = 150
+
 
 export const App = () => {
     const [pokemons, setPokemons] = useState([])
-
+    const [qty, setQty] = useState(16)
 
     useEffect(() => {
         setPokemons(prevState => prevState=[])
-        for (; start <= end; start++) {
+        let start = 1
+        for (; start <= qty; start++) {
             axios.get(baseUrl.concat(start)).then((res) => {
                 let data = {
                     id: res.data.id,
@@ -26,7 +26,7 @@ export const App = () => {
                 setPokemons(prevState => [...prevState, data])
             })
         }
-    }, [])
+    }, [qty])
 
     const sortedPokemons = () => {
         return pokemons.sort(function (a, b) {
@@ -36,7 +36,10 @@ export const App = () => {
 
     return (
         <div>
-            <Header title="Pokemon's list."/>
+            <Header title="Pokemon's list - "
+                    qty={qty}
+                    setQty={setQty}
+            />
             <main>
                 <Pokemons pokemons={sortedPokemons} />
             </main>

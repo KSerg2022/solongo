@@ -14,7 +14,6 @@ export const Pokemons = ({pokemons}) => {
     }, [pokemons])
 
     function filteredPokemons(filter = []) {
-        console.log('1---filteredPokemons', filter, filter.length, currentData)
         filter.length === 0
             ? setCurrentData(pokemons)
             : setCurrentData([...baseData].filter((pokemon) => everyType(pokemon.types, filter)))
