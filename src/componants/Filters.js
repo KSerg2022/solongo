@@ -21,7 +21,6 @@ function getListFilters(data) {
     return categories
 }
 
-
 export const Filters = ({pokemons, onFilter}) => {
     const [types, setTypes] = useState([])
     const [filters, setFilters] = useState({})
@@ -31,21 +30,9 @@ export const Filters = ({pokemons, onFilter}) => {
         setFilters(getListFilters(pokemons))
     }, [pokemons])
 
-
-    function upgradeStatus(e) {
-        let name = e.target.name
-        // console.log('1--upgradeStatus--', name, filters)
-        setFilters(prevState => {
-            return {...prevState, [name]: !prevState[name]}
-        })
-
-        // setFilters({
-        //     ...filters, [name]: !filters[name]
-        // })
-
-        // console.log('2--upgradeStatus--', filters)
+    useEffect(() => {
         currentFilter()
-    }
+    }, [filters])
 
 
     function currentFilter() {
@@ -68,7 +55,7 @@ export const Filters = ({pokemons, onFilter}) => {
                             type="checkbox"
                             id={value}
                             name={value}
-                            onChange={upgradeStatus}
+                            onChange={e => setFilters({...filters, [e.target.name]: !filters[e.target.name]})}
                         />
                     ))}
                 </div>
