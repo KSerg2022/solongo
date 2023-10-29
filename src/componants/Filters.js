@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import MyCheckBox from "./UI/MyCheckBox";
+import MyCheckBox from "./UI/MyCheckBox/MyCheckBox";
 
 
 function getListTypes(data) {
