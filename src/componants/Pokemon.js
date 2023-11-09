@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-import PokSprites from "./PokSprites";
-import PokTypes from "./PokTypes";
-import PolName from "./PolName";
+import CardPokemon from "./CardPokemon";
 
 
 export const Pokemon = ({pokemons}) => {
@@ -15,11 +13,13 @@ export const Pokemon = ({pokemons}) => {
     return (
         <div className="row d-flex justify-content-center mb-3">
             {cardsPokemon?.map(pokemon =>
-                <div className="col- pokemon" key={pokemon.id}>
-                    <PokSprites sprites={pokemon.img_url}/>
-                    <PolName id={pokemon.id} name={pokemon.name}/>
-                    <PokTypes types={pokemon.types}/>
-                </div>
+                <CardPokemon
+                    key={pokemon.id}
+                    sprites={pokemon.img_url}
+                    id={pokemon.id}
+                    name={pokemon.name}
+                    types={pokemon.types}
+                />
             )
             }
         </div>
