@@ -55,16 +55,24 @@ main {
 
 }
 
-main .pokemon {
+.pokemon {
     font-family: 'Montserrat', sans-serif; /*https://fonts.google.com/*/
     font-weight: 300;
-    /*margin-bottom: 25px;*/
     margin: 5px;
     background-color: var(--background-color-field);
     padding: 5px;
     width: 220px;
-    height: auto;
+    /*height: auto;*/
+    min-height: 200px;
     font-size: 15px;
+    border-radius: 0px 0px 4px 4px;
+}
+.pokemon__sceleton {
+    background-color: #77b2b4;
+    margin: 5px;
+    padding: 5px;
+    width: 220px;
+    min-height: 200px;
     border-radius: 0px 0px 4px 4px;
 }
 
